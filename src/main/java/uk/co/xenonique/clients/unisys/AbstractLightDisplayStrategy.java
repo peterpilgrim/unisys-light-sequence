@@ -39,7 +39,7 @@ public abstract class AbstractLightDisplayStrategy implements LightDisplayStrate
     @Override
     public void reset() {
         sequenceCount = 0;
-        for ( int k=0; k<container.size(); ++k ) {
+        for (int k = 0; k < container.size(); ++k) {
             container.getLight(k).setLit(false);
         }
     }

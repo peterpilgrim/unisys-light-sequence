@@ -32,14 +32,14 @@ public class LightApplication {
 
         System.out.printf("Strategy: [%s]", strategy.getClass().getSimpleName());
 
-        while ( strategy.getSequenceCount() < 100 ) {
+        while (strategy.getSequenceCount() < 100) {
             final int sleepTime = strategy.getPulseLength();
             System.out.printf("SEQ COUNT: %4d\n", strategy.getSequenceCount());
             strategy.nextSequence();
-            for (int j = 0; j<container.size(); ++j ) {
+            for (int j = 0; j < container.size(); ++j) {
                 final FairyLight light = container.getLight(j);
-                System.out.printf("[%2d] %6s: %3s |  ", j, light.getColour(), (light.isLit()?"on":"off"));
-                if ( j % 10 == 9 ) {
+                System.out.printf("[%2d] %6s: %3s |  ", j, light.getColour(), (light.isLit() ? "on" : "off"));
+                if (j % 10 == 9) {
                     System.out.println();
                 }
             }

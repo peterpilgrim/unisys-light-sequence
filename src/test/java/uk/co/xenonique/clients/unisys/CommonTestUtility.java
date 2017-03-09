@@ -29,18 +29,17 @@ import static org.junit.Assert.assertThat;
  */
 public class CommonTestUtility {
 
-    public static void assertLightDisplayReset( LightContainer container, LightDisplayStrategy strategy )
-    {
-        final int N = (int)(3 + Math.random() * 100);
-        for ( int j=0; j< N; ++j) {
+    public static void assertLightDisplayReset(LightContainer container, LightDisplayStrategy strategy) {
+        final int N = (int) (3 + Math.random() * 100);
+        for (int j = 0; j < N; ++j) {
             strategy.nextSequence();
         }
-        assertThat( strategy.getSequenceCount(), is(N));
+        assertThat(strategy.getSequenceCount(), is(N));
 
         strategy.reset();
-        assertThat( strategy.getSequenceCount(), is(0));
-        for (int j=0; j<container.size(); ++j) {
-            assertThat( container.getLight(j).isLit(), is(false));
+        assertThat(strategy.getSequenceCount(), is(0));
+        for (int j = 0; j < container.size(); ++j) {
+            assertThat(container.getLight(j).isLit(), is(false));
         }
     }
 }
