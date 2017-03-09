@@ -26,8 +26,9 @@ apply plugin: 'idea'
 
 defaultTasks 'clean', 'build'
 
-version = 'light-sequence-1.0-SNAPSHOT'
-group = 'uk.co.xenonique.clients.unisys'
+group = 'uk.co.xenonique.clients.myjobmatcher'
+archivesBaseName = 'job-importer'
+version = '1.0-SNAPSHOT'
 
 
 
