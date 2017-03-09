@@ -142,3 +142,14 @@ task runAlternate(type: JavaExec) {
     args 'Alternate'
 }
 
+
+
+task runGUI(type: JavaExec) {
+    description = "Executes the JavaFX GUI demo application"
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = "uk.co.xenonique.clients.unisys.LightDisplayJavaFXApplication"
+
+    args 'TBD'
+}
+

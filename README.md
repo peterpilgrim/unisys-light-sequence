@@ -47,6 +47,16 @@ Run the program with the *"Alternate"* algorithm:
 
 
 
+Bonus GUI aplication, run the JavaFX application with the following command:
+
+    > gradle runGUI
+    
+
+NB: You might have to hard CONTROL-C to get the GUI to halt.
+
+
+
+
     
 
     
