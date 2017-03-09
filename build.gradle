@@ -1,0 +1,143 @@
+/*******************************************************************************
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+ *
+ * Copyright (c) 2017 by Peter Pilgrim, Milton Keynes, P.E.A.T UK LTD
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Creative Commons 3.0
+ * Non Commercial Non Derivation Share-alike License
+ * https://creativecommons.org/licenses/by-nc-nd/4.0/
+ *
+ * Developers:
+ * Peter Pilgrim -- design, development and implementation
+ *               -- Blog: http://www.xenonique.co.uk/blog/
+ *               -- Twitter: @peter_pilgrim
+ *
+ * Contributors:
+ *
+ *******************************************************************************/
+defaultTasks 'clean', 'build'
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+
+defaultTasks 'clean', 'build'
+
+version = 'light-sequence-1.0-SNAPSHOT'
+group = 'uk.co.xenonique.clients.unisys'
+
+
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+idea.module {
+    downloadSources = true
+}
+
+
+dependencies {
+    testCompile "junit:junit:4.12"
+    testCompile 'org.hamcrest:hamcrest-all:1.3'
+    testCompile "org.mockito:mockito-all:1.9.5"
+}
+
+// Override Gradle defaults - a force an exploded JAR view
+sourceSets {
+    main {
+        output.resourcesDir = 'build/classes/main'
+        output.classesDir   = 'build/classes/main'
+    }
+    test {
+        output.resourcesDir = 'build/classes/test'
+        output.classesDir   = 'build/classes/test'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.3'
+}
+
+// Java version compatibility to use when compiling Java source 
+sourceCompatibility = '1.8'
+// Java version to generate classes
+targetCompatibility = '1.8'
+
+
+idea {
+
+    module {
+        //if you love browsing Javadoc
+        downloadJavadoc = false
+
+        //and hate reading sources :)
+        downloadSources = true
+    }
+}
+
+task myZip(type: Zip) {
+    description = "Creates a ZIP distribution of the `${archivesBaseName}' project."
+    from '.'
+    def datestamp = new Date().format("yyyyMMdd")
+    def targetName = "peter-pilgrim-${archivesBaseName}-sources-${version}-${datestamp}.zip"
+    archiveName "${targetName}"
+    include '**/src/**'
+    include '**/*.xml'
+    include '**/*.gradle'
+    include '**/*.txt'
+    exclude '**/.gradle/**'
+    exclude '**/.svn/**'
+    exclude '**/.git/**'
+    exclude '**/build/**'
+    exclude '**/out/**'
+    exclude '**/target/**'
+    /*
+    exclude {
+        details ->
+            details.file.name.equals('.gradle')
+    }
+    */
+
+    doLast {
+        println "**** Creating achive targetName=${targetName} ****"
+    }
+}
+
+task run(type: JavaExec, dependsOn: classes) {
+    description = "Executes main application with default strategy"
+    classpath = sourceSets.main.runtimeClasspath
+
+    // Define the main application
+    main = "uk.co.xenonique.clients.unisys.LightApplication"
+
+    // arguments to pass to the application
+    args 'Sequence'
+}
+
+task runColour(type: JavaExec) {
+    description = "Executes main application with chosen strategy"
+    classpath = sourceSets.main.runtimeClasspath
+
+    // Define the main application
+    main = "uk.co.xenonique.clients.unisys.LightApplication"
+
+    // arguments to pass to the application
+    args 'Colour'
+}
+
+task runAlternate(type: JavaExec) {
+    description = "Executes main application with chosen strategy"
+    classpath = sourceSets.main.runtimeClasspath
+
+    // Define the main application
+    main = "uk.co.xenonique.clients.unisys.LightApplication"
+
+    // arguments to pass to the application
+    args 'Alternate'
+}
+
